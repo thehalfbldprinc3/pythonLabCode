@@ -1,22 +1,27 @@
-#Simple reverse
+# Program to reverse a string using a loop and a library function
+
+# Function to reverse a string using a loop
 def reverseString(string):
     reverseStr = ""
-
-    for i in range(len(string)-1, -1, -1):
-        reverseStr+= string[i]
-    
+    for i in range(len(string) - 1, -1, -1):
+        reverseStr += string[i]
     return reverseStr
 
-# Reverse using library function
+# Function to reverse a string using a library function
 def reverseString2(string):
-    string="".join(reversed(string))
-    
-    return string
+    return "".join(reversed(string))
 
-string = input("enter the string: ")
-reverseStr= reverseString(string)
-reverseStr2= reverseString2(string)
+# Taking user input
+string = input("Enter the string: ")
 
-print("Original String: ", string)
-print("Reversed String: ", reverseStr)
-print("Reversed String using Library Function: ", reverseStr2) 
+# Calling both functions
+reverseStr = reverseString(string)
+reverseStr2 = reverseString2(string)
+
+# Displaying results
+print("\nOriginal String:", string)
+print("Reversed String (using loop):", reverseStr)
+print("Reversed String (using library function):", reverseStr2)
+
+# Thanking the user
+print("\nThank you for using the string reversal program!")

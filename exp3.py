@@ -1,9 +1,27 @@
-number= int(input("Enter a number: "))
-fact=1
-if(number<0):
-    print("Factorial of negative number Does not exist")
-elif(number==0):
-    print("Factorial of 0 is 1")
-else:
-    for i in range(1, number+1):
-        fact= fact*i
+# Program to calculate the factorial of a number using a loop
+
+# Taking user input
+num = input("Enter a number to calculate its factorial: ")
+
+# Type conversion and validation
+try:
+    num = int(num)
+    if num < 0:
+        print("Factorial is not defined for negative numbers.")
+        exit()
+except ValueError:
+    print("Invalid input! Please enter a numeric value.")
+    exit()
+
+# Initializing factorial to 1
+factorial = 1
+
+# Calculating factorial using a loop
+for i in range(1, num + 1):
+    factorial *= i
+
+# Displaying the result
+print(f"The factorial of {num} is {factorial}.")
+
+# Thanking the user
+print("Thank you for using the factorial calculator!")
