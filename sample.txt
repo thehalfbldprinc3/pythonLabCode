@@ -1,1 +1,2 @@
-The rain in Spain stays mainly in the plain.
+this is a test input to sample.txt using fileManagement script
+this is appended content
