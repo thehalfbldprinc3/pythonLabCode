@@ -1,30 +1,35 @@
 import socket
 
-# Create a socket object
+HOST = '127.0.0.1'
+PORT = 8000
+
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# Bind the socket to a specific address and port
-HOST = '127.0.0.1'  # Localhost
-PORT = 12345
 server_socket.bind((HOST, PORT))
-
-# Start listening for connections
 server_socket.listen()
 
-print(f"Server is listening on {HOST}:{PORT}")
+print(f"Listening on http://{HOST}:{PORT}/callback ...")
 
-# Accept a connection
 client_socket, addr = server_socket.accept()
+request = client_socket.recv(1024).decode('utf-8')
+
 print(f"Connected by {addr}")
+print("Request received:")
+print(request)
 
-# Receive data from the client
-data = client_socket.recv(1024).decode('utf-8')
-print(f"Received: {data}")
+# Extract the authorization code from the request
+if "GET /callback?" in request:
+    # Grab the full query string
+    request_line = request.split('\n')[0]
+    query_string = request_line.split(' ')[1]  # e.g. /callback?code=AQDw...
+    print("Query string:", query_string)
 
-# Send a response
-response = "Hello from the server!"
-client_socket.send(response.encode('utf-8'))
+    # Send a basic HTML response
+    response = (
+        "HTTP/1.1 200 OK\r\n"
+        "Content-Type: text/html\r\n\r\n"
+        "<html><body><h1>Authorization complete. You may close this window.</h1></body></html>"
+    )
+    client_socket.sendall(response.encode('utf-8'))
 
-# Close the connection
 client_socket.close()
 server_socket.close()
