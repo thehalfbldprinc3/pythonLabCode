@@ -1,2 +1,0 @@
-this is a test input to sample.txt using fileManagement script
-this is appended content
